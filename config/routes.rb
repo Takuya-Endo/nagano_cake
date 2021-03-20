@@ -2,6 +2,15 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: 'homes#top'
+    resources :items, except: [:destroy]
+              # admin_items GET    /admin/items(.:format)          admin/items#index
+                          # POST   /admin/items(.:format)          admin/items#create
+           # new_admin_item GET    /admin/items/new(.:format)      admin/items#new
+          # edit_admin_item GET    /admin/items/:id/edit(.:format) admin/items#edit
+               # admin_item GET    /admin/items/:id(.:format)      admin/items#show
+                          # PATCH  /admin/items/:id(.:format)      admin/items#update
+                          # PUT    /admin/items/:id(.:format)      admin/items#update
+
   end
 
   devise_for :admin
