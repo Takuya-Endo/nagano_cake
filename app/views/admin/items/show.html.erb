@@ -1,0 +1,9 @@
+<h1>商品詳細</h1>
+
+<p><span>商品名</span><%= @item.name %></p>
+<span>商品説明</span><%= @item.introduction %></p>
+<p>ジャンル</p>
+<p><span>税込価格<br>(税抜価格)</span><%= @item.price %></p>
+<p>販売ステータス</p>
+
+<%= link_to "編集する", new_admin_item %>
