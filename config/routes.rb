@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    root to: 'homes#top'
+  end
+
   devise_for :admin
         # new_admin_session GET    /admin/sign_in(.:format)       devise/sessions#new
             # admin_session POST   /admin/sign_in(.:format)       devise/sessions#create
