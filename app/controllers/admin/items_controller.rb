@@ -10,6 +10,10 @@ class Admin::ItemsController < ApplicationController
       redirect_to root_path
     end
 
+    def index
+      @items = Item.all
+    end
+
     private
       def item_params
         params.require(:list).permit(:image, :name, :introduction, :price)
