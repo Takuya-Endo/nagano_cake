@@ -2,10 +2,12 @@
 
 <% @items.each do |item| %>
 
-  <span><%= item.id %></span>
-  <span><%= item.name%></span>
-  <span><%= item.price %></span>
-  <span>ジャンル</span>
-  <span>販売ステータス</span>
+  <div>
+    <span><%= item.id %></span>
+    <span><%= link_to item.name, admin_item_path(item.id) %></span>
+    <span><%= item.price %></span>
+    <span>ジャンル</span>
+    <span>販売ステータス</span>
+  </div>
 
 <% end %>
