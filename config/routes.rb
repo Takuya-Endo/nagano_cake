@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  scope module: :public do
+    root to: 'homes#top'
+    get 'homes/about'
+  end
+
   devise_for :customers
       #   new_customer_session GET    /customers/sign_in(.:format)        devise/sessions#new
             # customer_session POST   /customers/sign_in(.:format)        devise/sessions#create
