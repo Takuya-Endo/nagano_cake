@@ -11,6 +11,8 @@
   <body>
 
     <header>
+
+      <!--管理者ログイン中のヘッダー-->
       <% if admin_signed_in? %>
         <li>
           <%= link_to "商品一覧", admin_items_path %>
@@ -20,6 +22,18 @@
         </li>
       <% else %>
       <% end %>
+
+      <!--会員ログイン中のヘッダー-->
+      <% if customer_signed_in? %>
+        <li>
+          <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to "ログイン", new_customer_session_path %>
+        </li>
+      <% end %>
+
     </header>
 
     <%= yield %>
