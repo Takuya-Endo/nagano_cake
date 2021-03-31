@@ -33,6 +33,13 @@ Rails.application.routes.draw do
                           # PATCH  /admin/items/:id(.:format)      admin/items#update
                           # PUT    /admin/items/:id(.:format)      admin/items#update
 
+    resources :customers, except: [:new, :create, :destroy]
+            #  admin_customers GET    /admin/customers(.:format)           admin/customers#index
+        #  edit_admin_customer GET    /admin/customers/:id/edit(.:format)  admin/customers#edit
+            #   admin_customer GET    /admin/customers/:id(.:format)       admin/customers#show
+                            #  PATCH  /admin/customers/:id(.:format)       admin/customers#update
+                            #  PUT    /admin/customers/:id(.:format)       admin/customers#update
+
   end
 
   devise_for :admin
