@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 
 
-
+  # before_action :authenticate_admin!, unless: proc { admin_signed_in? }
 
   # before_action :authenticate, except: [:top, :about, :admin_registration]
 
