@@ -1,5 +1,8 @@
 class Public::CartItemsController < ApplicationController
+
   def index
+    @cart_items = CartItem.where(customer_id: current_customer)
+    # @item = Item.where(id: :@cart_item_id)
   end
 
   def update
@@ -15,10 +18,9 @@ class Public::CartItemsController < ApplicationController
     @cart_item = CartItem.new(cart_item_params)
 
       @cart_item.customer_id = current_customer.id
-      @cart_item.item_id = @item
 
     @cart_item.save
-    redirect_to root_path
+    redirect_to cart_items_path
   end
 
   private

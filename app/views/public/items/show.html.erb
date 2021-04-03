@@ -4,6 +4,7 @@
 <p><%= @item.price %></p>
 
 <%= form_with model:@cart_item, url: '/cart_items', local: true do |f| %>
+  <%= f.hidden_field :item_id, value: @item.id %>
   <span>数量</span><%= f.text_field :amount %>
   <%= f.submit 'カートに入れる' %>
 <% end %>
