@@ -7,6 +7,7 @@
       <td><%= @item.name %></td>
       <td><%= @item.price %></td>
       <td><%= cart_item.amount %></td>
+      <td><%= @item.price * cart_item.amount %></td>
     </tr>
   <% end %>
 </table>
