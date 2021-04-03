@@ -8,13 +8,15 @@ Rails.application.routes.draw do
     #   items GET    /items(.:format)      public/items#index
        # item GET    /items/:id(.:format)  public/items#show
 
-    # destroy_all
+    delete '/cart_items/destroy_all' => 'cart_items#destroy_all'
+
     resources :cart_items, only: [:index, :update, :destroy, :create]
     #   cart_items GET    /cart_items(.:format)      public/cart_items#index
                 #  POST   /cart_items(.:format)      public/cart_items#create
      #   cart_item PATCH  /cart_items/:id(.:format)  public/cart_items#update
                 #  PUT    /cart_items/:id(.:format)  public/cart_items#update
                 #  DELETE /cart_items/:id(.:format)  public/cart_items#destroy
+
   end
 
   devise_for :customers
