@@ -3,6 +3,11 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get 'homes/about'
+
+    resources :items, only: [:index, :show]
+    #   items GET    /items(.:format)      public/items#index
+       # item GET    /items/:id(.:format)  public/items#show
+
   end
 
   devise_for :customers
