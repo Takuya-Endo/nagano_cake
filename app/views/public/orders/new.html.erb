@@ -8,6 +8,9 @@
   <%= f.label :payment, "銀行振込", {value: :bank} %>
 
   <h2>お届け先</h2>
+  <%= f.hidden_field :customer_id, value: current_customer.id %>
+  <p><%= @customer.postal_code %><%= @customer.address %></p>
+  <p><%= @customer.last_name %><%= @customer.first_name %></p>
 
   <%= f.submit '確認画面へ進む' %>
 <% end %>

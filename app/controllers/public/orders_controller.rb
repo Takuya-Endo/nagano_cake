@@ -1,6 +1,7 @@
 class Public::OrdersController < ApplicationController
 
   def new
+    @customer = Customer.find(current_customer.id)
     @order = Order.new
   end
 
