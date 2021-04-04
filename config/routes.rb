@@ -17,6 +17,14 @@ Rails.application.routes.draw do
                 #  PUT    /cart_items/:id(.:format)  public/cart_items#update
                 #  DELETE /cart_items/:id(.:format)  public/cart_items#destroy
 
+    #orders_confirm
+    #thanks
+    resources :orders, except: [:edit, :update, :destroy]
+    #   orders GET    /orders(.:format)      public/orders#index
+            #  POST   /orders(.:format)      public/orders#create
+ #   new_order GET    /orders/new(.:format)  public/orders#new
+     #   order GET    /orders/:id(.:format)  public/orders#show
+
   end
 
   devise_for :customers

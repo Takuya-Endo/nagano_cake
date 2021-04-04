@@ -26,6 +26,9 @@
       <!--会員ログイン中のヘッダー-->
       <% if customer_signed_in? %>
         <li>
+          <%= link_to "商品一覧", items_path %>
+        </li>
+        <li>
           <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
         </li>
       <% else %>
