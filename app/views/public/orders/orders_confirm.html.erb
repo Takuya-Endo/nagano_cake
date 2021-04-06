@@ -1,2 +1,22 @@
-<h1>Public::Orders#orders_confirm</h1>
-<p>Find me in app/views/public/orders/orders_confirm.html.erb</p>
+<h1>注文情報確認</h1>
+
+<table>
+  <tr> <th>商品名</th> <th>単価(税込)</th> <th>数量</th> <th>小計</th> </tr>
+
+  <tr> <td></td> <td></td> <td></td> <td></td> </tr>
+
+</table>
+
+<%= form_with model: @order, url: '/orders', local: true do |f| %>
+
+  <%= f.hidden_field :customer_id, value: current_customer.id %>
+  <%= f.text_field :shipping_postal_code, value: @order.shipping_postal_code, readonly: true %>
+  <%= f.text_field :shipping_address, value: @order.shipping_address, readonly: true %>
+  <%= f.text_field :shipping_name, value:  @order.shipping_name, readonly: true %>
+  <%= f.hidden_field :shipping_fee, value: @order.shipping_fee %>
+  <%= f.hidden_field :total_payment, value: "100" %>
+  <%= f.hidden_field :payment, value: @order.payment %>
+
+  <%= f.submit '注文を確定する' %>
+
+<% end %>

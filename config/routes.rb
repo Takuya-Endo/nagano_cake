@@ -17,8 +17,8 @@ Rails.application.routes.draw do
                 #  PUT    /cart_items/:id(.:format)  public/cart_items#update
                 #  DELETE /cart_items/:id(.:format)  public/cart_items#destroy
 
-    #orders_confirm
-    #thanks
+    post '/orders_confirm' => 'orders#orders_confirm'
+    get '/orders/thanks' => 'orders#thanks'
     resources :orders, except: [:edit, :update, :destroy]
     #   orders GET    /orders(.:format)      public/orders#index
             #  POST   /orders(.:format)      public/orders#create

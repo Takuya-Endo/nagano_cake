@@ -6,12 +6,16 @@ class Public::OrdersController < ApplicationController
   end
 
   def orders_confirm
+    @order = Order.new(order_params)
   end
 
   def thanks
   end
 
   def create
+    order = Order.new(order_params)
+    order.save
+    redirect_to '/orders/thanks'
   end
 
   def index
@@ -19,4 +23,10 @@ class Public::OrdersController < ApplicationController
 
   def show
   end
+
+  private
+  def order_params
+    params.require(:order).permit(:customer_id, :shipping_postal_code, :shipping_address, :shipping_name, :shipping_fee, :total_payment, :payment)
+  end
+
 end
