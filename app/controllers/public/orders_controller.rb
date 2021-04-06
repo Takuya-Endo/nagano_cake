@@ -10,6 +10,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def thanks
+    CartItem.where(customer_id: current_customer).destroy_all
   end
 
   def create
