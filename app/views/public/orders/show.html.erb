@@ -1,2 +1,16 @@
-<h1>Public::Orders#show</h1>
-<p>Find me in app/views/public/orders/show.html.erb</p>
+<h1>注文履歴詳細</h1>
+<h2>注文情報</h2>
+<table>
+  <tr> <td>注文日</td> <td><%= @order.updated_at %></td> </tr>
+  <tr>
+    <td>配送先</td>
+    <td>
+      <p><%= @order.shipping_postal_code %></p>
+      <p><%= @order.shipping_address %></p>
+      <p><%= @order.shipping_name %></p>
+    </td>
+  </tr>
+  <tr> <td>支払方法</td> <td><%= @order.payment %></td> </tr>
+</table>
+<h2>注文内容</h2>
+<h2>請求情報</h2>
