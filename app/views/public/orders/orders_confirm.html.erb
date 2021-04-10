@@ -1,11 +1,41 @@
 <h1>注文情報確認</h1>
 
-<table>
-  <tr> <th>商品名</th> <th>単価(税込)</th> <th>数量</th> <th>小計</th> </tr>
 
-  <tr> <td></td> <td></td> <td></td> <td></td> </tr>
-
-</table>
+<%#= form_with model: @order_details, url: '/orders', local: true do |f| %>
+  <table>
+    <tr> <th>商品名</th> <th>単価(税込)</th> <th>数量</th> <th>小計</th> </tr>
+    <% @cart_items.each do |cart_item| %>
+      <% item = @items.find_by(id: cart_item.item_id) %>
+        <tr>
+          <td><%= item.name %></td>
+          <td><%= item.price %></td>
+          <td><%= cart_item.amount %></td>
+          <td><%= item.price * cart_item.amount %></td>
+        </tr>
+      <div>
+      <%#= f.text_field 'order_id[]', value: @order.id %>
+      <%#= f.text_field 'item_id[]', value: item.id %>
+      <%#= f.text_field 'tax_included_price[]', value: item.price + (item.price * 0.1) %>
+      <%#= f.text_field 'amount[]', value: cart_item.amount %>
+        <%#= fields_for 'order_details[]', @order_detail do |g| %>
+        <%#= g.text_field :order_id, value: @order.id %>
+        <%#= g.text_field :item_id, value: item.id %>
+        <%#= g.text_field :tax_included_price, value: item.price + (item.price * 0.1) %>
+        <%#= g.text_field :amount, value: cart_item.amount %>
+      <%# end %>
+      </div>
+      <%#= f.fields_for :order_detail do |g| %>
+        <%#= g.hidden_field :order_id, value: @order.id %>
+        <%#= g.hidden_field :item_id, value: item.id %>
+        <%#= g.hidden_field :tax_included_price, value: item.price * 1.1 %>
+        <%#= g.hidden_field :amount, value: cart_item.amount %>
+      <%# end %>
+      <%#= f.fields_for :order_detail do |g| %>
+        <%#= g.hidden_field :order_id, value: @order.id %>
+        <%#= g.hidden_field :item_id, value: item.id %>
+      <%# end %>
+    <% end %>
+  </table>
 
 <%= form_with model: @order, url: '/orders', local: true do |f| %>
 
@@ -16,6 +46,11 @@
   <%= f.hidden_field :shipping_fee, value: @order.shipping_fee %>
   <%= f.hidden_field :total_payment, value: "100" %>
   <%= f.hidden_field :payment, value: @order.payment %>
+
+  <%#= f.fields_for :order_detail do |g| %>
+    <%#= g.hidden_field :order_id, value: @order.id %>
+    <%#= g.hidden_field :item_id, value: item.id %>
+  <%# end %>
 
   <%= f.submit '注文を確定する' %>
 
