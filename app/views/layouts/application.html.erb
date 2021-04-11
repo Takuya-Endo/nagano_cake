@@ -14,17 +14,6 @@
 
       <h1><%= link_to "LOGO", root_path %></h1>
 
-      <!--管理者ログイン中のヘッダー-->
-      <% if admin_signed_in? %>
-        <li>
-          <%= link_to "商品一覧", admin_items_path %>
-        </li>
-        <li>
-          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-        </li>
-      <% else %>
-      <% end %>
-
       <!--会員ログイン中のヘッダー-->
       <% if customer_signed_in? %>
         <li>
@@ -43,18 +32,31 @@
           <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
         </li>
       <% else %>
-        <li>
-          <%= link_to "About", '/about' %>
-        </li>
-        <li>
-          <%= link_to "商品一覧", items_path %>
-        </li>
-        <li>
-          <%= link_to "新規登録", new_customer_registration_path %>
-        </li>
-        <li>
-          <%= link_to "ログイン", new_customer_session_path %>
-        </li>
+
+        <!--管理者ログイン中のヘッダー-->
+        <% if admin_signed_in? %>
+          <li>
+            <%= link_to "商品一覧", admin_items_path %>
+          </li>
+          <li>
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+          </li>
+        <% else %>
+
+          <li>
+            <%= link_to "About", '/about' %>
+          </li>
+          <li>
+            <%= link_to "商品一覧", items_path %>
+          </li>
+          <li>
+            <%= link_to "新規登録", new_customer_registration_path %>
+          </li>
+          <li>
+            <%= link_to "ログイン", new_customer_session_path %>
+          </li>
+
+        <% end %>
       <% end %>
 
     </header>
