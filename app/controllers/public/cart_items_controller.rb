@@ -1,5 +1,5 @@
 class Public::CartItemsController < ApplicationController
-  
+
   before_action :authenticate_customer!
 
   def index
@@ -30,8 +30,14 @@ class Public::CartItemsController < ApplicationController
 
       @cart_item.customer_id = current_customer.id
 
-    @cart_item.save
-    redirect_to cart_items_path
+    if @cart_item.save
+      redirect_to cart_items_path
+    else
+      # @item = Item.find_by(id: @cart_item.item_id)
+       redirect_to item_path(@cart_item.item_id), flash: { error: @cart_item.errors.full_messages }
+      # render template: "public/items/show"
+      # @item = Item.find(params[:id])
+    end
   end
 
   private
