@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
 
-  enum payment: { credit: 1, bank: 2 }
+  enum payment: { クレジットカード: 1, 銀行振込: 2 }
   # クレジットカード：1　銀行振込：2
 
   enum order_status: { waiting: 1, confirmation: 2, making: 3, preparing: 4, shipped: 5 }
