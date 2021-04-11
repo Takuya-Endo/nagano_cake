@@ -3,27 +3,27 @@
 <%= form_with model: @order, url: '/orders_confirm', local: true do |f| %>
 
   <h2>支払方法</h2>
-  <%= f.radio_button :payment, :credit , checked: true %>
-  <%= f.label :payment, "クレジットカード", {value: :credit} %>
-  <%= f.radio_button :payment, :bank %>
-  <%= f.label :payment, "銀行振込", {value: :bank} %>
+  <%= f.radio_button :payment, :クレジットカード , checked: true %>
+  <%= f.label :payment, "クレジットカード", {value: :クレジットカード} %>
+  <%= f.radio_button :payment, :銀行振込 %>
+  <%= f.label :payment, "銀行振込", {value: :銀行振込} %>
 
   <h2>お届け先</h2>
   <%= f.hidden_field :customer_id, value: current_customer.id %>
   <p><%= @customer.postal_code %><%= @customer.address %></p>
   <p><%= @customer.last_name %><%= @customer.first_name %></p>
 
-  <% total_payment = 0 %>
+  <% total_price = 0 %>
   <% @cart_items.each do |cart_item| %>
     <% item = @items.find_by(id: cart_item.item_id) %>
-    <% total_payment += (item.price * cart_item.amount) %>
+    <% total_price += ((item.price * 1.1).round * cart_item.amount) %>
   <% end %>
 
   <%= f.hidden_field :shipping_postal_code, value: @customer.postal_code %>
   <%= f.hidden_field :shipping_address, value: @customer.address %>
   <%= f.hidden_field :shipping_name, value:  @customer.last_name + @customer.first_name %>
   <%= f.hidden_field :shipping_fee, value: "800" %>
-  <%= f.hidden_field :total_payment, value: total_payment + 800 %>
+  <%= f.hidden_field :total_payment, value: total_price + 800 %>
 
   <%= f.submit '確認画面へ進む' %>
 <% end %>
