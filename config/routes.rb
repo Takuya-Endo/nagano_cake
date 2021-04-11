@@ -1,10 +1,5 @@
 Rails.application.routes.draw do
 
-  scope module: :public do
-    root to: 'homes#top'
-    get 'homes/about'
-  end
-
   devise_for :customers
       #   new_customer_session GET    /customers/sign_in(.:format)        devise/sessions#new
             # customer_session POST   /customers/sign_in(.:format)        devise/sessions#create
@@ -21,6 +16,39 @@ Rails.application.routes.draw do
                             #  PUT    /customers(.:format)                devise/registrations#update
                             #  DELETE /customers(.:format)                devise/registrations#destroy
                             #  POST   /customers(.:format)                devise/registrations#create
+
+  scope module: :public do
+    root to: 'homes#top'
+    get '/about' => 'homes#about'
+
+    resources :items, only: [:index, :show]
+    #   items GET    /items(.:format)      public/items#index
+       # item GET    /items/:id(.:format)  public/items#show
+
+    get '/customers/current_customer/unsubscribe_confirm' => 'customers#unsubscribe_confirm'
+    resources :customers, param: :current_customer, only: [:show, :edit, :update]
+    # edit_customer GET    /customers/:current_customer/edit(.:format)  public/customers#edit
+        #  customer GET    /customers/:current_customer(.:format)       public/customers#show
+                #   PATCH  /customers/:current_customer(.:format)       public/customers#update
+                #   PUT    /customers/:current_customer(.:format)       public/customers#update
+
+    delete '/cart_items/destroy_all' => 'cart_items#destroy_all'
+    resources :cart_items, only: [:index, :update, :destroy, :create]
+    #   cart_items GET    /cart_items(.:format)      public/cart_items#index
+                #  POST   /cart_items(.:format)      public/cart_items#create
+     #   cart_item PATCH  /cart_items/:id(.:format)  public/cart_items#update
+                #  PUT    /cart_items/:id(.:format)  public/cart_items#update
+                #  DELETE /cart_items/:id(.:format)  public/cart_items#destroy
+
+    post '/orders_confirm' => 'orders#orders_confirm'
+    get '/orders/thanks' => 'orders#thanks'
+    resources :orders, except: [:edit, :update, :destroy]
+    #   orders GET    /orders(.:format)      public/orders#index
+            #  POST   /orders(.:format)      public/orders#create
+ #   new_order GET    /orders/new(.:format)  public/orders#new
+     #   order GET    /orders/:id(.:format)  public/orders#show
+
+  end
 
   namespace :admin do
     root to: 'homes#top'
