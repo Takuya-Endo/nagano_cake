@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    get 'orders/index'
+    get 'orders/update_order_status'
+  end
   devise_for :customers
       #   new_customer_session GET    /customers/sign_in(.:format)        devise/sessions#new
             # customer_session POST   /customers/sign_in(.:format)        devise/sessions#create
@@ -110,6 +114,10 @@ Rails.application.routes.draw do
             #   admin_customer GET    /admin/customers/:id(.:format)       admin/customers#show
                             #  PATCH  /admin/customers/:id(.:format)       admin/customers#update
                             #  PUT    /admin/customers/:id(.:format)       admin/customers#update
+    patch '/orders/update_order_status/:id' => 'orders#update_order_status'
+    resources :orders, only: [:index]
+# admin_admin_orders_update_order_status PATCH  /admin/admin/orders/update_order_status(.:format)  admin/orders#update_order_status
+                        #   admin_orders GET    /admin/orders(.:format)                            admin/orders#index
 
   end
 
