@@ -23,7 +23,7 @@
   <%= f.hidden_field :shipping_address, value: @customer.address %>
   <%= f.hidden_field :shipping_name, value:  @customer.last_name + @customer.first_name %>
   <%= f.hidden_field :shipping_fee, value: "800" %>
-  <%= f.hidden_field :total_payment, value: total_payment %>
+  <%= f.hidden_field :total_payment, value: total_payment + 800 %>
 
   <%= f.submit '確認画面へ進む' %>
 <% end %>
