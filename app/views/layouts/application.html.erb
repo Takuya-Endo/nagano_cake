@@ -31,7 +31,7 @@
           <span>ようこそ、<%= current_customer.last_name %>さん！</span>
         </li>
         <li>
-          <%= link_to "マイページ", customer_path(current_customer.id) %>
+          <%= link_to "マイページ", '/customers/:current_customer' %>
         </li>
         <li>
           <%= link_to "商品一覧", items_path %>

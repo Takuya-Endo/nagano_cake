@@ -25,12 +25,12 @@ Rails.application.routes.draw do
     #   items GET    /items(.:format)      public/items#index
        # item GET    /items/:id(.:format)  public/items#show
 
-    # customers/unsubscribe_confirm
-    resources :customers, only: [:show, :edit, :update]
-    # edit_customer GET    /customers/:id/edit(.:format)  public/customers#edit
-         # customer GET    /customers/:id(.:format)       public/customers#show
-                 #  PATCH  /customers/:id(.:format)       public/customers#update
-                 #  PUT    /customers/:id(.:format)       public/customers#update
+    get '/customers/current_customer/unsubscribe_confirm' => 'customers#unsubscribe_confirm'
+    resources :customers, param: :current_customer, only: [:show, :edit, :update]
+    # edit_customer GET    /customers/:current_customer/edit(.:format)  public/customers#edit
+        #  customer GET    /customers/:current_customer(.:format)       public/customers#show
+                #   PATCH  /customers/:current_customer(.:format)       public/customers#update
+                #   PUT    /customers/:current_customer(.:format)       public/customers#update
 
     delete '/cart_items/destroy_all' => 'cart_items#destroy_all'
     resources :cart_items, only: [:index, :update, :destroy, :create]
