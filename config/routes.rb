@@ -29,8 +29,6 @@ Rails.application.routes.draw do
   namespace :admin do
 
     root to: 'homes#top'
-    get 'orders/index'
-    get 'orders/update_order_status'
     resources :items, except: [:destroy]
               # admin_items GET    /admin/items(.:format)          admin/items#index
                           # POST   /admin/items(.:format)          admin/items#create
@@ -46,6 +44,7 @@ Rails.application.routes.draw do
             #   admin_customer GET    /admin/customers/:id(.:format)       admin/customers#show
                             #  PATCH  /admin/customers/:id(.:format)       admin/customers#update
                             #  PUT    /admin/customers/:id(.:format)       admin/customers#update
+
     patch '/orders/update_order_status/:id' => 'orders#update_order_status'
     resources :orders, only: [:index]
 # admin_admin_orders_update_order_status PATCH  /admin/admin/orders/update_order_status(.:format)  admin/orders#update_order_status

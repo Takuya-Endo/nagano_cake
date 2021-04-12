@@ -37,12 +37,25 @@
     <% end %>
   </table>
 
+  <table>
+    <tr> <tr>送料</tr> <tr><%= @order.shipping_fee %></tr> </tr>
+    <tr> <tr>商品合計</tr> <tr><%= @order.total_payment - @order.shipping_fee %></tr> </tr>
+    <tr> <tr>請求金額</tr> <tr><%= @order.total_payment %></tr> </tr>
+  </table>
+
+  <h2>支払方法</h2>
+  <%= @order.payment %>
+
+  <h2>お届け先</h2>
+  <p><%= @order.shipping_postal_code%> <%= @order.shipping_address %></p>
+  <p><%= @order.shipping_name %></p>
+
 <%= form_with model: @order, url: '/orders', local: true do |f| %>
 
   <%= f.hidden_field :customer_id, value: current_customer.id %>
-  <%= f.text_field :shipping_postal_code, value: @order.shipping_postal_code, readonly: true %>
-  <%= f.text_field :shipping_address, value: @order.shipping_address, readonly: true %>
-  <%= f.text_field :shipping_name, value:  @order.shipping_name, readonly: true %>
+  <%= f.hidden_field :shipping_postal_code, value: @order.shipping_postal_code, readonly: true %>
+  <%= f.hidden_field :shipping_address, value: @order.shipping_address, readonly: true %>
+  <%= f.hidden_field :shipping_name, value:  @order.shipping_name, readonly: true %>
   <%= f.hidden_field :shipping_fee, value: @order.shipping_fee %>
   <%= f.hidden_field :total_payment, value: @order.total_payment %>
   <%= f.hidden_field :payment, value: @order.payment %>
