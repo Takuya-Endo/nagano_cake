@@ -1,1 +1,21 @@
-<h1>商品一覧</h1>
+<h1>注文履歴一覧</h1>
+
+<table>
+  <tr> <th>購入日時</th> <th>購入者</th> <th>注文個数</th> </tr>
+  <% @orders.each do |order| %>
+  <% customer = Customer.find(order.customer_id) %>
+
+  <% @order_details = OrderDetail.where(order_id: order.id) %>
+  <% amount = 0 %>
+  <% @order_details.each do |order_detail| %>
+    <% amount += order_detail.amount %>
+  <% end %>
+
+  <tr>
+    <td><%= link_to order.updated_at.strftime("%Y/%m/%d %H:%M:%S"), "/admin/orders/update_order_status/#{order.id}", method: :patch %></td>
+    <td><%= customer.last_name %><%= customer.first_name %></td>
+    <td><%= amount %></td>
+  </tr>
+  <% end %>
+  <%= paginate @orders %>
+</table>
