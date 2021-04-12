@@ -17,14 +17,17 @@
         <td><%= (item.price * 1.1).round %></td>
 
         <td>
-            <%#= @cart_item = cart_item %>
-          <%#= form_with model:cart_item, url: cart_item_path(@cart_item.id), local: true do |f| %>
-            <%= cart_item.amount %>
+            <% @cart_item = cart_item %>
+          <%= form_with model: @cart_item, url: cart_item_path(@cart_item.id), local: true do |f| %>
+            <%= f.hidden_field :item_id %>
+            <%= f.hidden_field :customer_id %>
+            <%= f.number_field :amount %>
+            <%#= cart_item.amount %>
             <%#= @cart_item = cart_item %>
             <%#= f.hidden_field :item_id, value: item.id %>
             <%#= f.number_field :amount, size: "1x1", min: 1, value: cart_item.amount %>
-            <%#= f.submit '変更' %>
-          <%# end %>
+            <%= f.submit '変更' %>
+          <% end %>
         </td>
 
         <td><%= (item.price * 1.1).round * cart_item.amount %></td>
