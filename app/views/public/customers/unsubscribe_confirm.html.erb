@@ -7,7 +7,7 @@
 
 <%= link_to "退会しない", customer_path(current_customer.id) %>
 
-<%= form_with model: @customer, url: '/customers/current_customer', local: true do |f| %>
+<%= form_with model: @customer, url: '/customers/update_unsubscribe/:current_customer', local: true do |f| %>
   <%#= f.radio_button :is_active, false, checked: true %>
   <%= f.hidden_field :is_active, value: false %>
   <%= f.submit '退会する' %>

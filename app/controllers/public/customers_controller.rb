@@ -13,7 +13,14 @@ class Public::CustomersController < ApplicationController
   def update
     customer = Customer.find(current_customer.id)
     customer.update(customer_params)
-    redirect_to '/customers/current_customer'
+    redirect_to '/customers/:current_customer'
+  end
+
+  def update_unsubscribe
+    customer = Customer.find(current_customer.id)
+    customer.update(is_active: false)
+    reset_session
+    redirect_to root_path
   end
 
   def unsubscribe_confirm

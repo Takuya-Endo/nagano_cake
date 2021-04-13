@@ -53,22 +53,28 @@ Rails.application.routes.draw do
   end
 
 
-  devise_for :customers
-      #   new_customer_session GET    /customers/sign_in(.:format)        devise/sessions#new
-            # customer_session POST   /customers/sign_in(.:format)        devise/sessions#create
-    # destroy_customer_session DELETE /customers/sign_out(.:format)       devise/sessions#destroy
-     #   new_customer_password GET    /customers/password/new(.:format)   devise/passwords#new
-    #   edit_customer_password GET    /customers/password/edit(.:format)  devise/passwords#edit
-         #   customer_password PATCH  /customers/password(.:format)       devise/passwords#update
-                            #  PUT    /customers/password(.:format)       devise/passwords#update
-                            #  POST   /customers/password(.:format)       devise/passwords#create
-# cancel_customer_registration GET    /customers/cancel(.:format)         devise/registrations#cancel
- #   new_customer_registration GET    /customers/sign_up(.:format)        devise/registrations#new
-#   edit_customer_registration GET    /customers/edit(.:format)           devise/registrations#edit
-     #   customer_registration PATCH  /customers(.:format)                devise/registrations#update
-                            #  PUT    /customers(.:format)                devise/registrations#update
-                            #  DELETE /customers(.:format)                devise/registrations#destroy
-                            #  POST   /customers(.:format)                devise/registrations#create
+
+  devise_for :customers, controllers: {
+    sessions: 'customers/sessions',
+    registrations: 'customers/registrations',
+    passwords: 'customers/passwords'
+    }
+            #   new_customer_session GET    /customers/sign_in(.:format)        devise/sessions#new
+                #   customer_session POST   /customers/sign_in(.:format)        devise/sessions#create
+        #   destroy_customer_session DELETE /customers/sign_out(.:format)       devise/sessions#destroy
+            #  new_customer_password GET    /customers/password/new(.:format)   devise/passwords#new
+            # edit_customer_password GET    /customers/password/edit(.:format)  devise/passwords#edit
+                #  customer_password PATCH  /customers/password(.:format)       devise/passwords#update
+                                 #   PUT    /customers/password(.:format)       devise/passwords#update
+                                 #   POST   /customers/password(.:format)       devise/passwords#create
+    #   cancel_customer_registration GET    /customers/cancel(.:format)         customers/registrations#cancel
+        #  new_customer_registration GET    /customers/sign_up(.:format)        customers/registrations#new
+        # edit_customer_registration GET    /customers/edit(.:format)           customers/registrations#edit
+            #  customer_registration PATCH  /customers(.:format)                customers/registrations#update
+                                 #   PUT    /customers(.:format)                customers/registrations#update
+                                 #   DELETE /customers(.:format)                customers/registrations#destroy
+                                 #   POST   /customers(.:format)                customers/registrations#create
+
 
   scope module: :public do
     root to: 'homes#top'
@@ -79,6 +85,7 @@ Rails.application.routes.draw do
        # item GET    /items/:id(.:format)  public/items#show
 
     get '/customers/current_customer/unsubscribe_confirm' => 'customers#unsubscribe_confirm'
+    patch '/customers/update_unsubscribe/:current_customer' => 'customers#update_unsubscribe'
     resources :customers, param: :current_customer, only: [:show, :edit, :update]
     # edit_customer GET    /customers/:current_customer/edit(.:format)  public/customers#edit
         #  customer GET    /customers/:current_customer(.:format)       public/customers#show
@@ -121,6 +128,22 @@ Rails.application.routes.draw do
                           # DELETE /admin(.:format)               devise/registrations#destroy
                           # POST   /admin(.:format)               devise/registrations#create
 
+#   devise_for :customers
+      #   new_customer_session GET    /customers/sign_in(.:format)        devise/sessions#new
+            # customer_session POST   /customers/sign_in(.:format)        devise/sessions#create
+    # destroy_customer_session DELETE /customers/sign_out(.:format)       devise/sessions#destroy
+     #   new_customer_password GET    /customers/password/new(.:format)   devise/passwords#new
+    #   edit_customer_password GET    /customers/password/edit(.:format)  devise/passwords#edit
+         #   customer_password PATCH  /customers/password(.:format)       devise/passwords#update
+                            #  PUT    /customers/password(.:format)       devise/passwords#update
+                            #  POST   /customers/password(.:format)       devise/passwords#create
+# cancel_customer_registration GET    /customers/cancel(.:format)         devise/registrations#cancel
+ #   new_customer_registration GET    /customers/sign_up(.:format)        devise/registrations#new
+#   edit_customer_registration GET    /customers/edit(.:format)           devise/registrations#edit
+     #   customer_registration PATCH  /customers(.:format)                devise/registrations#update
+                            #  PUT    /customers(.:format)                devise/registrations#update
+                            #  DELETE /customers(.:format)                devise/registrations#destroy
+                            #  POST   /customers(.:format)                devise/registrations#create
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

@@ -39,6 +39,14 @@ class ApplicationController < ActionController::Base
 #else
 #before_action :authenticate_admin!
 
+  # def after_sign_up_path_for(resource)
+    # customer_path(current_customer.id)
+  # end
+
+  # def after_inactive_sign_up_path_for(resource)
+    # customer_path(current_customer.id)
+  # end
+
   def after_sign_out_path_for(resource_or_scope)
     if resource_or_scope == :admin
       new_admin_session_path
@@ -65,7 +73,7 @@ class ApplicationController < ActionController::Base
   # end
 
   before_action :configure_permitted_parameters, if: :devise_controller?
-  # before_action :reject_customer, only: [:create]
+
 
   protected
 
@@ -73,12 +81,4 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:last_name, :first_name, :last_name_kana, :first_name_kana, :postal_code, :address, :telephone_number, :is_active])
   end
 
-  def reject_customer
-    @customer = Customer.find_by(email: params[:customer][:email].downcase)
-    if @customer
-      if (@customer.valid_password?(params[:customer][:password]) && (@customer.active_for_authentication? == false))
-        redirect_to root_path
-      end
-    end
-  end
 end
